@@ -1,0 +1,49 @@
+{
+  "name": "color-contrast-checker-demo",
+  "version": "1.0.0",
+  "description": "Open source demonstration of WCAG 2.1 color contrast checking functionality",
+  "type": "module",
+  "private": false,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2",
+    "tinycolor2": "^1.6.0",
+    "lucide-react": "^0.462.0",
+    "tailwind-merge": "^2.5.2",
+    "clsx": "^2.1.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.3",
+    "@types/react-dom": "^18.3.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.9.0",
+    "postcss": "^8.4.47",
+    "tailwindcss": "^3.4.11",
+    "typescript": "^5.5.3",
+    "vite": "^7.2.4"
+  },
+  "keywords": [
+    "accessibility",
+    "wcag",
+    "color-contrast",
+    "a11y",
+    "web-accessibility",
+    "contrast-checker",
+    "demo"
+  ],
+  "author": "Color Contrast Checker Team",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/color-contrast-checker-demo"
+  }
+}
+

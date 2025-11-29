@@ -1,0 +1,36 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+  }
+
+  /* Placeholder text contrast improvements */
+  input::placeholder,
+  textarea::placeholder {
+    color: rgb(107, 114, 128) !important; /* gray-500 - good contrast on light backgrounds */
+    opacity: 1 !important; /* Ensure full opacity for readability */
+  }
+
+  input:focus::placeholder,
+  textarea:focus::placeholder {
+    color: rgb(156, 163, 175) !important; /* gray-400 - slightly lighter when focused but still readable */
+    opacity: 1 !important;
+  }
+
+  /* Dark mode placeholder styling */
+  .dark input::placeholder,
+  .dark textarea::placeholder {
+    color: rgb(156, 163, 175) !important; /* gray-400 - good contrast on dark backgrounds */
+    opacity: 1 !important;
+  }
+
+  .dark input:focus::placeholder,
+  .dark textarea:focus::placeholder {
+    color: rgb(209, 213, 219) !important; /* gray-300 - lighter when focused in dark mode */
+    opacity: 1 !important;
+  }
+}
