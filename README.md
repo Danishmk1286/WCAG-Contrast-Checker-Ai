@@ -26,6 +26,9 @@ Unlike traditional tools that only say “Pass” or “Fail”, this assistant:
 It helps teams fix accessibility problems **without compromising brand identity**.
 
 ---
+<img width="1028" height="902" alt="image" src="https://github.com/user-attachments/assets/b6085b2e-e8f8-4e5e-8ea4-d6975f0ec051" />
+
+---
 
 ## 🚨 The Problem
 
