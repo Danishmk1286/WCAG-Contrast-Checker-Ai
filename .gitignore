@@ -1,0 +1,74 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Dependencies
+node_modules
+bun.lockb
+
+# Build outputs
+dist
+dist-ssr
+
+# Environment variables
+*.local
+.env
+.env.local
+.env.production
+.env.development
+server/.env
+server/.env.local
+server/.env.production
+
+# Database
+server/cms.db
+server/cms.db-journal
+*.db
+*.db-journal
+
+# Sensitive credentials (NEVER commit)
+server/secure/
+private/
+**/ga-key.json
+**/ga4-service-account.json
+**/*-service-account.json
+
+# Deployment artifacts
+*.zip
+.deployment-temp/
+CPANEL_DEPLOYMENT_PACKAGE/
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+Thumbs.db
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*~
+
+# Documentation (internal)
+*.docx
+*.doc
+
+# Test files
+test-*.html

@@ -1,0 +1,93 @@
+[
+  {
+    "id": 1,
+    "title": "The WCAG Color Contrast Imperative: Designing for Inclusive Readability",
+    "slug": "wcag-color-contrast-inclusive-readability",
+    "excerpt": "Poor color contrast isn't just a design flaw – it's the web's most common accessibility issue. This article explains the global Web Content Accessibility Guidelines (WCAG) on color contrast and why adhering to these standards is critical.",
+    "author": "Danish Khan",
+    "date": "2025-12-15",
+    "readTime": "8 min read",
+    "tags": [
+      "WCAG",
+      "Accessibility",
+      "Color Contrast",
+      "Web Design",
+      "Inclusive Design",
+      "ADA Compliance"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Designing for Low Vision and Color Blindness: The Case for High Contrast",
+    "slug": "designing-low-vision-color-blind-high-contrast",
+    "excerpt": "Over 2.2 billion people worldwide live with vision impairments – from low vision to cataracts to color blindness – and low-contrast design can shut many of them out. This article shows how using accessible color contrast empowers these users.",
+    "author": "Danish Khan",
+    "date": "2026-01-08",
+    "readTime": "10 min read",
+    "tags": [
+      "Low Vision",
+      "Color Blindness",
+      "Accessibility",
+      "WCAG",
+      "Inclusive Design",
+      "Visual Impairments"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Building Accessible Color Systems in Modern UI Design: A Frontend Developer's Guide",
+    "slug": "accessible-color-systems-frontend-ui-design",
+    "excerpt": "Learn how to implement accessible color systems in React, Vue, and vanilla JavaScript. This technical guide covers contrast calculation algorithms, dynamic color generation, and WCAG-compliant design tokens for modern web applications.",
+    "author": "Danish Khan",
+    "date": "2026-01-20",
+    "readTime": "12 min read",
+    "tags": [
+      "Frontend Development",
+      "React",
+      "JavaScript",
+      "Color Systems",
+      "Design Tokens",
+      "WCAG",
+      "Accessibility",
+      "UI Design"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "WCAG Contrast Handling in Modern Web Apps: Implementation Patterns and Best Practices",
+    "slug": "wcag-contrast-handling-modern-web-apps",
+    "excerpt": "A deep dive into implementing WCAG contrast validation in production React, Vue, and vanilla JavaScript applications. Learn real-world patterns for dynamic color generation, real-time validation, and maintaining accessibility in complex UIs.",
+    "author": "Danish Khan",
+    "date": "2026-01-25",
+    "readTime": "14 min read",
+    "tags": [
+      "WCAG",
+      "React",
+      "Vue",
+      "JavaScript",
+      "Contrast Validation",
+      "Web Development",
+      "Accessibility",
+      "Frontend"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "Practical Frontend Accessibility Patterns: Color Contrast in Real-World Applications",
+    "slug": "practical-frontend-accessibility-patterns-color-contrast",
+    "excerpt": "Real-world patterns for implementing accessible color contrast in production applications. Learn how to handle dynamic themes, user-generated content, and complex UI components while maintaining WCAG compliance.",
+    "author": "Danish Khan",
+    "date": "2026-01-30",
+    "readTime": "11 min read",
+    "tags": [
+      "Frontend Patterns",
+      "Accessibility",
+      "Color Contrast",
+      "WCAG",
+      "React",
+      "Vue",
+      "JavaScript",
+      "UI Components"
+    ]
+  }
+]

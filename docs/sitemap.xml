@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    
+    <!-- Core Tool Page (Highest Priority) -->
+    <url>
+        <loc>https://www.thecolorcontrastchecker.com/</loc>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>1.0</priority>
+    </url>
+
+    <!-- SEO Landing Page: WCAG Contrast Checker -->
+    <url>
+        <loc>https://www.thecolorcontrastchecker.com/checker</loc>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.95</priority>
+    </url>
+
+    <!-- SEO Landing Page: AI Color Suggestions -->
+    <url>
+        <loc>https://www.thecolorcontrastchecker.com/ai-color-suggestions</loc>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>daily</changefreq>
+        <priority>0.95</priority>
+    </url>
+
+    <!-- About Page -->
+    <url>
+        <loc>https://www.thecolorcontrastchecker.com/about</loc>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Legal Pages -->
+    <url>
+        <loc>https://www.thecolorcontrastchecker.com/privacy-policy</loc>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <url>
+        <loc>https://www.thecolorcontrastchecker.com/terms-of-service</loc>
+        <lastmod>2026-02-01</lastmod>
+        <changefreq>yearly</changefreq>
+        <priority>0.5</priority>
+    </url>
+</urlset>

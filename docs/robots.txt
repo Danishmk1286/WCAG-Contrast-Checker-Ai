@@ -1,0 +1,57 @@
+# robots.txt for The Color Contrast Checker
+# Optimized for SEO and search engine indexing
+
+# Default rules for all crawlers
+User-agent: *
+
+# Disallow admin and private areas
+Disallow: /admin
+Disallow: /admin/
+Disallow: /api/
+Disallow: /.well-known/
+
+# Explicitly allow important content pages
+Allow: /
+Allow: /blog
+Allow: /blog/
+Allow: /resources
+Allow: /about
+Allow: /privacy-policy
+Allow: /terms-of-service
+
+# Block specific file types
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /sitemap.xml
+
+# Sitemap location - Use dynamic sitemap from API
+Sitemap: https://api.thecolorcontrastchecker.com/sitemap.xml
+
+# Google-specific rules
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+# Bing-specific rules
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+Disallow: /admin
+Disallow: /api/
+
+# DuckDuckGo bot
+User-agent: DuckDuckBot
+Allow: /
+Disallow: /admin
+Disallow: /api/
+
+# Block bad bots that waste resources
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /

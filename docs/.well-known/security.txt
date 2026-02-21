@@ -1,0 +1,10 @@
+Contact: mailto:security@thecolorcontrastchecker.com
+Expires: 2026-12-31T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://www.thecolorcontrastchecker.com/.well-known/security.txt
+Policy: https://www.thecolorcontrastchecker.com/privacy-policy
+Hiring: https://www.thecolorcontrastchecker.com/about
+
+
+
+

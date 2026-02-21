@@ -1,0 +1,46 @@
+{
+  "name": "cms-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "build": "echo 'Server build: Validating setup...' && node -c server.js && echo '✓ Server syntax valid' && echo 'Build complete - server is ready to run'",
+    "dev": "node --watch server.js",
+    "start": "node server.js",
+    "cpanel-start": "node cpanel-start.js",
+    "reset-admin": "node reset-admin.js",
+    "unlock-account": "node unlock-account.js",
+    "unlock-all": "node -e \"import('./unlock-api.js').then(m => console.log(m.unlockAllAccounts()))\"",
+    "migrate-blogs": "node migrate-blogs.js",
+    "import-blogs": "node import-blogs.js",
+    "sync-blogs": "node sync-blogs-to-db.js",
+    "export-blogs": "node export-blogs.js",
+    "init-blogs": "node init-blogs.js",
+    "full-sync": "node -e \"import('./database.js').then(db => { db.initDatabase(); import('./blog-sync.js').then(sync => sync.performStartupSync()); })\"",
+    "test": "node test-backend.js"
+  },
+  "dependencies": {
+    "@google-analytics/data": "^4.0.0",
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^9.2.2",
+    "compression": "^1.8.1",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^8.2.1",
+    "express-slow-down": "^2.1.0",
+    "express-validator": "^7.3.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.15",
+    "sanitize-html": "^2.17.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/cors": "^2.8.17",
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/multer": "^1.4.11"
+  }
+}

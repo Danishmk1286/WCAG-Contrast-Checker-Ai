@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-M3LKGF8FCZ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-M3LKGF8FCZ');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Accessibility Blog | The Color Contrast Checker</title>
+  <meta name="description" content="Expert insights on web accessibility, WCAG compliance, and color contrast best practices.">
+  <link rel="canonical" href="https://www.thecolorcontrastchecker.com/blog">
+  <style>
+    :root { --primary: #2563eb; --bg: #fff; --fg: #0f172a; --muted: #f1f5f9; --muted-fg: #64748b; --border: #e2e8f0; }
+    @media (prefers-color-scheme: dark) { :root { --bg: #0f172a; --fg: #f8fafc; --muted: #1e293b; --muted-fg: #94a3b8; --border: #334155; } }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: system-ui, sans-serif; background: var(--bg); color: var(--fg); line-height: 1.6; }
+    .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+    header { text-align: center; margin-bottom: 3rem; }
+    h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+    .subtitle { color: var(--muted-fg); font-size: 1.125rem; }
+    .posts { display: flex; flex-direction: column; gap: 1.5rem; }
+    .post-card { padding: 1.5rem; border: 1px solid var(--border); border-radius: 0.75rem; transition: all 0.2s; }
+    .post-card:hover { border-color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    .post-meta { display: flex; flex-wrap: wrap; gap: 0.5rem; font-size: 0.875rem; color: var(--muted-fg); margin-bottom: 0.75rem; }
+    .post-card h2 { font-size: 1.25rem; margin-bottom: 0.5rem; }
+    .post-card h2 a { color: inherit; text-decoration: none; }
+    .post-card h2 a:hover { color: var(--primary); }
+    .post-card p { color: var(--muted-fg); font-size: 0.9375rem; margin-bottom: 0.75rem; }
+    .post-tags { display: flex; gap: 0.5rem; }
+    .tag { padding: 0.25rem 0.625rem; background: var(--muted); border-radius: 9999px; font-size: 0.75rem; }
+    .home-link { display: inline-block; margin-top: 2rem; color: var(--primary); text-decoration: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Accessibility Blog</h1>
+      <p class="subtitle">Expert insights on WCAG compliance and inclusive design</p>
+    </header>
+    <div class="posts">
+      
+    <article class="post-card">
+      <div class="post-meta">
+        <span>Danish Khan</span>
+        <span>•</span>
+        <time datetime="2025-11-29">Nov 29, 2025</time>
+        <span>•</span>
+        <span>8 min read</span>
+      </div>
+      <h2><a href="/blog/wcag-color-contrast-inclusive-readability.html">The WCAG Color Contrast Imperative: Designing for Inclusive Readability</a></h2>
+      <p>Poor color contrast isn&#39;t just a design flaw – it&#39;s the web&#39;s most common accessibility issue. This article explains the global Web Content Accessibility Guidelines (WCAG) on color contrast and why adhering to these standards is critical.</p>
+      <div class="post-tags"><span class="tag">WCAG</span><span class="tag">Accessibility</span><span class="tag">Color Contrast</span></div>
+    </article>
+
+    <article class="post-card">
+      <div class="post-meta">
+        <span>Danish Khan</span>
+        <span>•</span>
+        <time datetime="2025-11-29">Nov 29, 2025</time>
+        <span>•</span>
+        <span>10 min read</span>
+      </div>
+      <h2><a href="/blog/designing-low-vision-color-blind-high-contrast.html">Designing for Low Vision and Color Blindness: The Case for High Contrast</a></h2>
+      <p>Over 2.2 billion people worldwide live with vision impairments – from low vision to cataracts to color blindness – and low-contrast design can shut many of them out. This article shows how using accessible color contrast empowers these users.</p>
+      <div class="post-tags"><span class="tag">Low Vision</span><span class="tag">Color Blindness</span><span class="tag">Accessibility</span></div>
+    </article>
+    </div>
+    <a href="/" class="home-link">← Back to Color Contrast Checker</a>
+  </div>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# Force redirect to https://www
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^thecolorcontrastchecker\.com$ [NC,OR]
+RewriteCond %{HTTP_HOST} ^www\.thecolorcontrastchecker\.com$ [NC]
+RewriteRule ^$ https://www.thecolorcontrastchecker.com/ [R=301,L]
+
+# React Router fallback (handle client-side routes)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /index.html [L]

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Minimal polyfill for CommonJS compatibility -->
+    <script>
+      // Minimal polyfill - only what's absolutely necessary
+      if(!window.module)window.module={exports:{}};
+      if(!window.exports)window.exports={};
+      if(!window.require)window.require=function(id){return{default:{},__esModule:true}};
+      if(!window.Long){
+        window.Long=function(v,u){this.low=this.high=0;this.unsigned=u||false;if(v!==undefined){if(typeof v==='string'){var p=parseInt(v,16);this.low=p&0xFFFFFFFF;this.high=Math.floor(p/0x100000000)&0xFFFFFFFF}else if(typeof v==='number'){this.low=v&0xFFFFFFFF;this.high=Math.floor(v/0x100000000)&0xFFFFFFFF}}};
+        window.Long.fromString=function(s,u,r){if(!s)return new window.Long(0,u);r=r||16;var v=parseInt(String(s),r);if(isNaN(v))v=0;var l=new window.Long(v,u);l.low=v&0xFFFFFFFF;l.high=Math.floor(v/0x100000000)&0xFFFFFFFF;return l};
+        window.Long.fromNumber=function(n,u){var l=new window.Long(n,u);l.low=n&0xFFFFFFFF;l.high=Math.floor(n/0x100000000)&0xFFFFFFFF;return l};
+        window.Long.fromBits=function(l,h,u){var o=new window.Long(0,u);o.low=l;o.high=h;return o};
+        window.Long.prototype.toString=function(r){r=r||10;return(this.high*0x100000000+(this.low>>>0)).toString(r)}
+      }
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>AI Color Contrast Checker | WCAG 2.1 and 2.2 Tool</title>
+    <meta name="description" content="Free AI-powered WCAG color contrast checker. Test contrast ratios, meet AA and AAA compliance, and get AI suggestions for accessible color combinations." />
+    <meta name="keywords" content="color contrast checker, WCAG color contrast checker, contrast ratio checker, WCAG 2.1, WCAG 2.2, AI color contrast checker, WCAG AA, WCAG AAA, accessible color generator, fix low color contrast, check WCAG 2.2 color contrast, generate accessible color palettes, AI accessibility tool for UI design" />
+    <meta name="author" content="Danish Khan" />
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="AI Color Contrast Checker | WCAG 2.1 and 2.2 Tool" />
+    <meta property="og:description" content="Free AI-powered WCAG color contrast checker. Test contrast ratios, meet AA and AAA compliance, and get AI suggestions for accessible color combinations." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.thecolorcontrastchecker.com/" />
+    <meta property="og:image" content="https://www.thecolorcontrastchecker.com/assets/link-preview.jpg" />
+    <meta property="og:site_name" content="AI Color Contrast Checker" />
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="AI Color Contrast Checker | WCAG 2.1 and 2.2 Tool" />
+    <meta name="twitter:description" content="Free AI-powered WCAG color contrast checker. Test contrast ratios, meet AA and AAA compliance, and get AI suggestions for accessible color combinations." />
+    <meta name="twitter:image" content="https://www.thecolorcontrastchecker.com/assets/link-preview.jpg" />
+    
+    <!-- Google Analytics will be loaded only after user consent via GDPRNotice component -->
+
+    <!-- Performance: Preconnect to external domains -->
+    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
+    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+    
+    <!-- LCP Optimization: CSS is automatically injected by Vite during build -->
+    <!-- Preload is not needed - Vite handles CSS loading automatically -->
+    
+    <!-- Resource hints for better performance -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- HTTPS Enforcement: Force HTTPS redirect (server-side redirect also required) -->
+    <!-- Only apply upgrade-insecure-requests in production, not localhost -->
+    <script>
+      // Only apply CSP upgrade-insecure-requests in production
+      if (window.location.protocol !== 'http:' || !window.location.hostname.includes('localhost')) {
+        const meta = document.createElement('meta');
+        meta.httpEquiv = 'Content-Security-Policy';
+        meta.content = 'upgrade-insecure-requests';
+        document.head.appendChild(meta);
+      }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/placeholder.svg" />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

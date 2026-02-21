@@ -1,0 +1,30 @@
+{
+    "name": "@your-org/wcag-contrast-checker",
+    "version": "1.0.0",
+    "description": "Core WCAG 2.1 color contrast ratio calculator",
+    "main": "wcag-contrast-checker.ts",
+    "types": "wcag-contrast-checker.ts",
+    "scripts": {
+        "test": "echo \"No tests configured\" && exit 0"
+    },
+    "keywords": [
+        "wcag",
+        "contrast",
+        "accessibility",
+        "a11y",
+        "color",
+        "wcag2.1",
+        "wcag-aa",
+        "wcag-aaa"
+    ],
+    "author": "Your Name",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yourusername/wcag-contrast-checker.git"
+    },
+    "bugs": {
+        "url": "https://github.com/yourusername/wcag-contrast-checker/issues"
+    },
+    "homepage": "https://github.com/yourusername/wcag-contrast-checker#readme"
+}

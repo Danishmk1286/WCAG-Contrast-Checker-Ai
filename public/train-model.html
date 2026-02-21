@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M3LKGF8FCZ"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-M3LKGF8FCZ');
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Train ML Color Model</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.22.0/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tinycolor2@1.4.2/dist/tinycolor-min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; }
+        button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        button:hover { background: #0056b3; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        .status {
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 4px;
+            background: #e7f3ff;
+            border-left: 4px solid #007bff;
+        }
+        .error { background: #ffe7e7; border-color: #dc3545; }
+        .success { background: #e7f5e7; border-color: #28a745; }
+        .progress {
+            width: 100%;
+            height: 20px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-bar {
+            height: 100%;
+            background: #007bff;
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+        }
+        pre {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Train ML Color Contrast Model</h1>
+        <p>This will train a machine learning model to suggest accessible colors based on user input and background colors.</p>
+        
+        <button id="trainBtn" onclick="trainModel()">Train Model</button>
+        
+        <div id="status"></div>
+        <div id="progress" style="display: none;">
+            <div class="progress">
+                <div class="progress-bar" id="progressBar" style="width: 0%">0%</div>
+            </div>
+        </div>
+        
+        <div id="download" style="display: none; margin-top: 20px;">
+            <h3>✅ Model Training Complete!</h3>
+            <p>Click the button below to download the model files. Then:</p>
+            <ol>
+                <li>Extract the ZIP file</li>
+                <li>Copy the <code>pretrained-color-model</code> folder to your <code>public/</code> directory</li>
+                <li>Rebuild your application</li>
+            </ol>
+            <button onclick="downloadModel()">Download Model Files</button>
+        </div>
+    </div>
+
+    <script>
+        let trainedModel = null;
+        let modelData = null;
+
+        function getContrastRatio(color1, color2) {
+            const getLuminance = (hex) => {
+                const rgb = tinycolor(hex).toRgb();
+                const [r, g, b] = [rgb.r, rgb.g, rgb.b].map((val) => {
+                    val = val / 255;
+                    return val <= 0.03928 ? val / 12.92 : Math.pow((val + 0.055) / 1.055, 2.4);
+                });
+                return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+            };
+
+            const l1 = getLuminance(color1);
+            const l2 = getLuminance(color2);
+            const lighter = Math.max(l1, l2);
+            const darker = Math.min(l1, l2);
+            return (lighter + 0.05) / (darker + 0.05);
+        }
+
+        function createModel() {
+            const model = tf.sequential();
+            model.add(tf.layers.dense({ inputShape: [6], units: 12, activation: 'relu' }));
+            model.add(tf.layers.dense({ units: 12, activation: 'relu' }));
+            model.add(tf.layers.dense({ units: 3, activation: 'sigmoid' }));
+            model.compile({ optimizer: 'adam', loss: 'meanSquaredError' });
+            return model;
+        }
+
+        function generateTrainingData() {
+            const xs = [];
+            const ys = [];
+            
+            for (let i = 0; i < 5000; i++) {
+                const user = tinycolor.random();
+                const bg = tinycolor.random();
+                let target = user.clone();
+                
+                for (let j = 1; j <= 10; j++) {
+                    const lighter = user.clone().brighten(j * 5);
+                    const darker = user.clone().darken(j * 5);
+                    
+                    if (getContrastRatio(lighter.toHexString(), bg.toHexString()) >= 4.5) {
+                        target = lighter;
+                        break;
+                    }
+                    if (getContrastRatio(darker.toHexString(), bg.toHexString()) >= 4.5) {
+                        target = darker;
+                        break;
+                    }
+                }
+                
+                xs.push([
+                    user._r / 255, user._g / 255, user._b / 255,
+                    bg._r / 255, bg._g / 255, bg._b / 255
+                ]);
+                ys.push([target._r / 255, target._g / 255, target._b / 255]);
+            }
+            
+            return { xs: tf.tensor2d(xs), ys: tf.tensor2d(ys) };
+        }
+
+        async function trainModel() {
+            const btn = document.getElementById('trainBtn');
+            const status = document.getElementById('status');
+            const progress = document.getElementById('progress');
+            const progressBar = document.getElementById('progressBar');
+            
+            btn.disabled = true;
+            status.innerHTML = '<div class="status">Initializing model...</div>';
+            progress.style.display = 'block';
+            
+            try {
+                // Create model
+                status.innerHTML = '<div class="status">Creating model architecture...</div>';
+                const model = createModel();
+                
+                // Generate training data
+                status.innerHTML = '<div class="status">Generating training data (5000 samples)...</div>';
+                progressBar.style.width = '10%';
+                progressBar.textContent = '10%';
+                
+                const { xs, ys } = generateTrainingData();
+                progressBar.style.width = '20%';
+                progressBar.textContent = '20%';
+                
+                // Train model
+                status.innerHTML = '<div class="status">Training model (50 epochs - this may take 2-5 minutes)...</div>';
+                
+                let currentEpoch = 0;
+                await model.fit(xs, ys, {
+                    epochs: 50,
+                    batchSize: 32,
+                    shuffle: true,
+                    callbacks: {
+                        onEpochEnd: (epoch, logs) => {
+                            currentEpoch = epoch + 1;
+                            const progressPercent = 20 + (currentEpoch / 50) * 70;
+                            progressBar.style.width = progressPercent + '%';
+                            progressBar.textContent = Math.round(progressPercent) + '%';
+                            
+                            if (currentEpoch % 10 === 0) {
+                                status.innerHTML = `<div class="status">Training... Epoch ${currentEpoch}/50 - Loss: ${logs.loss.toFixed(4)}</div>`;
+                            }
+                        }
+                    }
+                });
+                
+                progressBar.style.width = '100%';
+                progressBar.textContent = '100%';
+                
+                // Save model to IndexedDB first (for verification)
+                status.innerHTML = '<div class="status">Saving model to browser storage...</div>';
+                await model.save('indexeddb://pretrained-color-model');
+                
+                // Then prepare for download
+                trainedModel = model;
+                
+                status.innerHTML = '<div class="status success">✅ Model trained successfully!</div>';
+                status.innerHTML += '<div class="status" style="margin-top: 10px;"><strong>Next steps:</strong><br>1. Click "Download Model Files" below<br>2. Extract the ZIP file<br>3. Copy the <code>pretrained-color-model</code> folder to your <code>public/</code> directory<br>4. Rename <code>pretrained-color-model.weights.bin</code> to <code>group1-shard1of1.bin</code><br>5. Run <code>npm run build</code></div>';
+                document.getElementById('download').style.display = 'block';
+                
+                // Clean up
+                xs.dispose();
+                ys.dispose();
+                
+            } catch (error) {
+                status.innerHTML = `<div class="status error">❌ Error: ${error.message}</div>`;
+                console.error(error);
+                btn.disabled = false;
+            }
+        }
+
+        async function downloadModel() {
+            if (!trainedModel) {
+                alert('Please train the model first!');
+                return;
+            }
+            
+            try {
+                status.innerHTML = '<div class="status">Preparing model files for download...</div>';
+                
+                // Get model topology and weights
+                const modelTopology = trainedModel.toJSON();
+                const weightData = await trainedModel.getWeights();
+                
+                // Verify weights
+                console.log('Number of weight tensors:', weightData.length);
+                let totalFloats = 0;
+                for (const weight of weightData) {
+                    const shape = weight.shape;
+                    const size = shape.reduce((a, b) => a * b, 1);
+                    totalFloats += size;
+                    console.log(`Weight shape: [${shape.join(',')}], size: ${size} floats`);
+                }
+                console.log(`Total floats: ${totalFloats}, expected bytes: ${totalFloats * 4}`);
+                
+                // Create model.json with correct structure
+                const modelJson = {
+                    modelTopology: modelTopology,
+                    format: "layers-model",
+                    generatedBy: "TensorFlow.js tfjs-layers v4.22.0",
+                    convertedBy: null,
+                    weightsManifest: [{
+                        paths: ['group1-shard1of1.bin'],
+                        weights: modelTopology.weights.map(w => ({
+                            name: w.name,
+                            shape: w.shape,
+                            dtype: w.dtype
+                        }))
+                    }]
+                };
+                
+                // Convert weights to Float32Array and then to binary
+                const weightArrays = [];
+                for (const weight of weightData) {
+                    const data = await weight.data();
+                    // Ensure it's Float32Array
+                    const float32Data = data instanceof Float32Array ? data : new Float32Array(data);
+                    weightArrays.push(float32Data);
+                }
+                
+                // Calculate total size
+                const totalBytes = weightArrays.reduce((sum, arr) => sum + arr.byteLength, 0);
+                console.log(`Total bytes: ${totalBytes} (should be ${totalFloats * 4})`);
+                
+                // Combine all weights into single Float32Array, then convert to Uint8Array
+                const combinedFloats = new Float32Array(totalFloats);
+                let floatOffset = 0;
+                for (const arr of weightArrays) {
+                    combinedFloats.set(arr, floatOffset);
+                    floatOffset += arr.length;
+                }
+                
+                // Convert Float32Array to Uint8Array (binary)
+                const combinedWeights = new Uint8Array(combinedFloats.buffer);
+                
+                console.log(`Final binary size: ${combinedWeights.length} bytes`);
+                
+                // Create blob URLs for download
+                const modelJsonBlob = new Blob([JSON.stringify(modelJson, null, 2)], { type: 'application/json' });
+                const weightsBlob = new Blob([combinedWeights], { type: 'application/octet-stream' });
+                
+                // Download files
+                const modelJsonUrl = URL.createObjectURL(modelJsonBlob);
+                const weightsUrl = URL.createObjectURL(weightsBlob);
+                
+                const modelLink = document.createElement('a');
+                modelLink.href = modelJsonUrl;
+                modelLink.download = 'model.json';
+                modelLink.click();
+                
+                setTimeout(() => {
+                    const weightsLink = document.createElement('a');
+                    weightsLink.href = weightsUrl;
+                    weightsLink.download = 'group1-shard1of1.bin';
+                    weightsLink.click();
+                    
+                    status.innerHTML += `<div class="status success" style="margin-top: 10px;">✅ Files downloaded!<br>Weights file size: ${combinedWeights.length} bytes (${totalFloats} floats)<br>Check your Downloads folder.</div>`;
+                    
+                    // Clean up
+                    setTimeout(() => {
+                        URL.revokeObjectURL(modelJsonUrl);
+                        URL.revokeObjectURL(weightsUrl);
+                    }, 1000);
+                }, 500);
+                
+            } catch (error) {
+                alert('Error downloading model: ' + error.message);
+                console.error(error);
+                status.innerHTML = '<div class="status error">❌ Error: ' + error.message + '</div>';
+            }
+        }
+    </script>
+</body>
+</html>
+
